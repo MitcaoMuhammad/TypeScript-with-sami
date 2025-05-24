@@ -1,14 +1,19 @@
 "use strict";
-const cars = ['BMW', 'Audi', 'Mercedes'];
-const numbers = [1, 2, 3, 4, 5];
-const bools = [true, false, true, false];
-// union types
-const mixed = ['BMW', 1, 'Audi', 2];
-// const result = numbers
-// 	.map(num => `Numbers: ${num}`)
-// 	.filter(num => num.includes('2'))
-// console.log(result)
-// const upperCaseCars = cars
-// 	.map(car => car.toUpperCase())
-// 	.filter(car => car.startsWith('B'))
-// console.log(upperCaseCars)
+function getInfo() {
+    return ['John Doe', 30];
+}
+const logger = getInfo();
+const [username, age] = logger;
+console.log(username, age);
+// // Tuple union type
+// let coordinates: [number, string | number] = [10, 20]
+// console.log('1', coordinates)
+// coordinates = [30, 'east']
+// console.log('2', coordinates)
+// coordinates = [40, 50]
+// console.log('3', coordinates)
+// const person: [string, number] = ['John Doe', 30]
+// person.push('Muhammad')
+// console.log(person)
+// console.log(person[0])
+// console.log(person[1])
