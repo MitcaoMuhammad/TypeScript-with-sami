@@ -1,16 +1,15 @@
 "use strict";
-function getName(firstName, lastName) {
-    return `${firstName} ${lastName}`;
-}
-const checkAdult = (age) => {
-    if (age >= 18) {
-        return true;
-    }
-    return false;
+const person = {
+    firstName: 'Muhammad',
+    lastName: 'Said',
+    city: 'Baku',
+    skills: {
+        programming: 'JavaScript',
+        desing: 'Figma',
+    },
 };
-const person1 = getName('Ali', 'Valiyev');
+function getName(data) {
+    return `${data.firstName} ${data.lastName}`;
+}
+const person1 = getName(person);
 console.log(person1);
-const isAdult = checkAdult(20);
-console.log(isAdult);
-// any: xoxlagan turdagi malimot qabul qilinadi
-// void: hech qanday malimot qaytarmaydi
