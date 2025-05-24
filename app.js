@@ -1,57 +1,29 @@
 "use strict";
-// enum Direction {
-// 	Up,
-// 	Down,
-// 	Left,
-// 	Right,
-// }
-// enum Direction {
-// 	Up = 1,
-// 	Down = 2,
-// 	Left = 3,
-// 	Right = 4,
-// }
-// enum Direction {
-// 	Up = 'UP',
-// 	Down = 'DOWN',
-// 	Left = 'LEFT',
-// 	Right = 'RIGHT',
-// }
-// const move: Direction = Direction.Up
-// console.log(move)
-// move = Direction.Down
-// console.log(move)
-// function getDirection(direction: Direction) {
-// 	if (direction === Direction.Up) {
-// 		return 'Moving Up'
-// 	} else if (direction === Direction.Down) {
-// 		return 'Moving Down'
-// 	} else if (direction === Direction.Left) {
-// 		return 'Moving Left'
-// 	} else if (direction === Direction.Right) {
-// 		return 'Moving Right'
-// 	}
-// }
-// const moveUp = getDirection(Direction.Up)
-// console.log(moveUp)
-// const moveDown = getDirection(Direction.Down)
-// console.log(moveDown)
-var StatusCode;
-(function (StatusCode) {
-    StatusCode[StatusCode["OK"] = 200] = "OK";
-    StatusCode[StatusCode["NOT_FOUND"] = 404] = "NOT_FOUND";
-    StatusCode[StatusCode["INTERNAL_SERVER_ERROR"] = 500] = "INTERNAL_SERVER_ERROR";
-})(StatusCode || (StatusCode = {}));
-function handleRequest(url) {
-    if (url === '/') {
-        return StatusCode.OK;
-    }
-    else if (url === '/not-found') {
-        return StatusCode.NOT_FOUND;
-    }
-    else {
-        return StatusCode.INTERNAL_SERVER_ERROR;
-    }
-}
-const homePageStatus = handleRequest('/');
-console.log(homePageStatus);
+var website;
+(function (website) {
+    website["facebook"] = "https://www.facebook.com";
+    website["twitter"] = "https://www.twitter.com";
+    website["instagram"] = "https://www.instagram.com";
+    website["youtube"] = "https://www.youtube.com";
+})(website || (website = {}));
+let person = {
+    id: 1,
+    name: 'Leanne Graham',
+    isMarried: false,
+    username: 'Bret',
+    email: 'Sincere@april.biz',
+    address: {
+        street: 'Kulas Light',
+        suite: 'Apt. 556',
+        city: 'Gwenborough',
+        zipcode: 929983874,
+        geo: [-37.3159, 81.1496],
+    },
+    phone: 17707368031,
+    website: website.facebook,
+    company: {
+        name: 'Romaguera-Crona',
+        catchPhrase: 'Multi-layered client-server neural-net',
+        bs: 'harness real-time e-markets',
+    },
+};

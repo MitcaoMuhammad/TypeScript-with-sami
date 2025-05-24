@@ -1,62 +1,48 @@
-// enum Direction {
-// 	Up,
-// 	Down,
-// 	Left,
-// 	Right,
-// }
-
-// enum Direction {
-// 	Up = 1,
-// 	Down = 2,
-// 	Left = 3,
-// 	Right = 4,
-// }
-
-// enum Direction {
-// 	Up = 'UP',
-// 	Down = 'DOWN',
-// 	Left = 'LEFT',
-// 	Right = 'RIGHT',
-// }
-
-// const move: Direction = Direction.Up
-// console.log(move)
-
-// move = Direction.Down
-// console.log(move)
-
-// function getDirection(direction: Direction) {
-// 	if (direction === Direction.Up) {
-// 		return 'Moving Up'
-// 	} else if (direction === Direction.Down) {
-// 		return 'Moving Down'
-// 	} else if (direction === Direction.Left) {
-// 		return 'Moving Left'
-// 	} else if (direction === Direction.Right) {
-// 		return 'Moving Right'
-// 	}
-// }
-
-// const moveUp = getDirection(Direction.Up)
-// console.log(moveUp)
-// const moveDown = getDirection(Direction.Down)
-// console.log(moveDown)
-
-enum StatusCode {
-	OK = 200,
-	NOT_FOUND = 404,
-	INTERNAL_SERVER_ERROR = 500,
+enum website {
+	facebook = 'https://www.facebook.com',
+	twitter = 'https://www.twitter.com',
+	instagram = 'https://www.instagram.com',
+	youtube = 'https://www.youtube.com',
 }
 
-function handleRequest(url: string): StatusCode {
-	if (url === '/') {
-		return StatusCode.OK
-	} else if (url === '/not-found') {
-		return StatusCode.NOT_FOUND
-	} else {
-		return StatusCode.INTERNAL_SERVER_ERROR
+let person: {
+	id: number
+	name: string
+	isMarried: boolean
+	username: string
+	email: string
+	address: {
+		street: string
+		suite: string
+		city: string
+		zipcode: string | number
+		geo: [number, number]
 	}
+	phone: number
+	website: website
+	company: {
+		name: string
+		catchPhrase: string
+		bs: string
+	}
+} = {
+	id: 1,
+	name: 'Leanne Graham',
+	isMarried: false,
+	username: 'Bret',
+	email: 'Sincere@april.biz',
+	address: {
+		street: 'Kulas Light',
+		suite: 'Apt. 556',
+		city: 'Gwenborough',
+		zipcode: 929983874,
+		geo: [-37.3159, 81.1496],
+	},
+	phone: 17707368031,
+	website: website.facebook,
+	company: {
+		name: 'Romaguera-Crona',
+		catchPhrase: 'Multi-layered client-server neural-net',
+		bs: 'harness real-time e-markets',
+	},
 }
-
-const homePageStatus = handleRequest('/')
-console.log(homePageStatus)
