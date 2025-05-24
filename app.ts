@@ -1,19 +1,16 @@
-function getName(firstName: string, lastName: string): string {
-	return `${firstName} ${lastName}`
+const person = {
+	firstName: 'Muhammad',
+	lastName: 'Said',
+	city: 'Baku',
+	skills: {
+		programming: 'JavaScript',
+		desing: 'Figma',
+	},
 }
 
-const checkAdult = (age: number): boolean => {
-	if (age >= 18) {
-		return true
-	}
-	return false
+function getName(data: { firstName: string; lastName: string }): string {
+	return `${data.firstName} ${data.lastName}`
 }
 
-const person1 = getName('Ali', 'Valiyev')
+const person1 = getName(person)
 console.log(person1)
-
-const isAdult = checkAdult(20)
-console.log(isAdult)
-
-// any: xoxlagan turdagi malimot qabul qilinadi
-// void: hech qanday malimot qaytarmaydi
