@@ -1,7 +1,5 @@
-let fullName: string = 'John Doe'
-let isMorried: boolean = true
-let age: number = 30
+const salary: number = 10000
+const bonus: number = 5000
 
-console.log(fullName)
-console.log(isMorried)
-console.log(age)
+const totalSalary: number = salary + bonus
+console.log(totalSalary)

@@ -1,7 +1,5 @@
 "use strict";
-let fullName = 'John Doe';
-let isMorried = true;
-let age = 30;
-console.log(fullName);
-console.log(isMorried);
-console.log(age);
+const salary = 10000;
+const bonus = 5000;
+const totalSalary = salary + bonus;
+console.log(totalSalary);
