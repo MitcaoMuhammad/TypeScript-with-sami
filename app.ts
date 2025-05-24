@@ -1,26 +1,12 @@
-function getInfo(): [string, number] {
-	return ['John Doe', 30]
-}
+let numbers: ReadonlyArray<number> = [1, 2, 3, 4, 5]
 
-const logger = getInfo()
+// let person: readonly [string, number] = ['John Doe', 30]
 
-const [username, age] = logger
-console.log(username, age)
+// const [fullname, age] = person
 
-// // Tuple union type
-// let coordinates: [number, string | number] = [10, 20]
-// console.log('1', coordinates)
+// console.log(fullname)
+// console.log(age)
 
-// coordinates = [30, 'east']
-// console.log('2', coordinates)
+// let admins: readonly number[] = [1, 2, 3, 4, 5]
 
-// coordinates = [40, 50]
-// console.log('3', coordinates)
-
-// const person: [string, number] = ['John Doe', 30]
-
-// person.push('Muhammad')
-
-// console.log(person)
-// console.log(person[0])
-// console.log(person[1])
+// console.log(admins)
