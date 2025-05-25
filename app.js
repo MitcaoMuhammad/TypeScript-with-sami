@@ -1,10 +1,13 @@
 "use strict";
-const person = {
-    firstName: 'John',
-    lastName: 'Doe',
-    age: 30,
-    country: 'USA',
-};
+// interface Person {
+// 	[key: string]: string | number
+// }
+// const person: Person = {
+// 	firstName: 'John',
+// 	lastName: 'Doe',
+// 	age: 30,
+// 	country: 'USA',
+// }
 // type Logger = (message: string) => void
 // interface Person {
 // 	readonly firstName: string

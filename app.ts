@@ -1,13 +1,13 @@
-interface Person {
-	[key: string]: string | number
-}
+// interface Person {
+// 	[key: string]: string | number
+// }
 
-const person: Person = {
-	firstName: 'John',
-	lastName: 'Doe',
-	age: 30,
-	country: 'USA',
-}
+// const person: Person = {
+// 	firstName: 'John',
+// 	lastName: 'Doe',
+// 	age: 30,
+// 	country: 'USA',
+// }
 
 // type Logger = (message: string) => void
 
