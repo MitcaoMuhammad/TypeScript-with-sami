@@ -1,18 +1,17 @@
-function throwError(message: string): never {
-	throw new Error('This is an error from the throwError function.')
-}
+// Null - Qiymat yo'q qulda uzimiz berishimiz kerak
+// undefined - o'zgaruvchiga qiymat berilmaganligini
 
-async function fetchData() {
-	try {
-		const response = await fetch('https://jsonplaceholder.typicode.com/users')
-		if (!response.ok) {
-			throw new Error('Network response was not ok')
-		}
-		const data = await response.json()
-		console.log('Data fetched successfully:', data)
-	} catch (error) {
-		throwError('Failed to fetch data: ' + error)
-	}
-}
+let userName: string | null = null
+let showUsername = userName ?? 'Guest'
+console.log(showUsername) // "Guest"
 
-fetchData()
+// function logger(msg: string | null): void {
+// 	if (msg === null) {
+// 		console.log('No message provided')
+// 	} else {
+// 		console.log(msg)
+// 	}
+// }
+
+// logger('Hello, World!') // "Hello, World!"
+// logger(null) // "No message provided"
