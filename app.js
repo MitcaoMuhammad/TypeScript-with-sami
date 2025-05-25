@@ -1,52 +1,48 @@
 "use strict";
-let persons = [
-    { firstName: 'John', lastName: 'Doe' },
-    { firstName: 'Jane', lastName: 'Smith' },
-];
-console.log(persons);
-// type Employee = {
+const person = {
+    firstName: 'John',
+    lastName: 'Doe',
+    age: 30,
+    country: 'USA',
+};
+// type Logger = (message: string) => void
+// interface Person {
+// 	readonly firstName: string
+// 	readonly lastName: string
+// 	role: string
+// 	logger: Logger
+// }
+// let persons: Person = {
+// 	firstName: 'John',
+// 	lastName: 'Doe',
+// 	role: 'Developer',
+// 	logger: (message: string) => {
+// 		console.log(`Log: ${message}`)
+// 	},
+// }
+// persons.role = 'user'
+// console.log(persons)
+// interface Employee {
 // 	company: string
 // 	position: string
 // }
-// type CompanyWorker = Person & Employee
-// let worker1: CompanyWorker = {
-// 	firstName: 'Alice',
-// 	lastName: 'Johnson',
-// 	company: 'TechCorp',
-// 	position: 'Software Engineer',
+// interface WorkerPerson extends Person, Employee {
+// 	age: number
 // }
-// let employee1: Employee = {
-// 	company: 'TechCorp',
-// 	position: 'Software Engineer',
-// }
-// let person1: Person = {
-// 	firstName: 'Alice',
-// 	lastName: 'Johnson',
-// }
-// type Logger = (message: string) => string
-// const log: Logger = message => {
-// 	return message.toUpperCase()
-// }
-// console.log(log('Hello, TypeScript!'))
-// import { Person } from './app.types'
-// const person1: Person = {
-// 	firstName: 'John',
-// 	lastName: 'Doe',
-// 	age: 30,
-// 	skills: ['JavaScript', 'TypeScript', 'React'],
-// }
-// const person2: Person = {
-// 	firstName: 'Jane',
-// 	lastName: 'Smith',
-// 	age: 25,
-// 	skills: ['Python', 'Django', 'Flask'],
-// }
-// console.log(person1)
-// console.log(person2)
-// type ID = string | number
-// let userId: ID
-// userId = 123
-// userId = '123'
-// let productId: ID
-// productId = 456
-// productId = '456'
+// let persons: WorkerPerson[] = [
+// 	{
+// 		firstName: 'John',
+// 		lastName: 'Doe',
+// 		age: 30,
+// 		company: 'Tech Corp',
+// 		position: 'Developer',
+// 	},
+// 	{
+// 		firstName: 'Jane',
+// 		lastName: 'Smith',
+// 		age: 25,
+// 		company: 'Health Inc',
+// 		position: 'Nurse',
+// 	},
+// ]
+// console.log(persons)
