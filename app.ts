@@ -1,40 +1,18 @@
-let person: unknown = {
-	name: 'John',
-	age: 30,
+function throwError(message: string): never {
+	throw new Error('This is an error from the throwError function.')
 }
 
-interface Person {
-	name: string
-	age: number
+async function fetchData() {
+	try {
+		const response = await fetch('https://jsonplaceholder.typicode.com/users')
+		if (!response.ok) {
+			throw new Error('Network response was not ok')
+		}
+		const data = await response.json()
+		console.log('Data fetched successfully:', data)
+	} catch (error) {
+		throwError('Failed to fetch data: ' + error)
+	}
 }
 
-if (typeof person === 'object') {
-	const obj = person as Person
-	console.log(`Name: ${obj.name}, Age: ${obj.age}`)
-}
-
-// let value: unknown = 20.514224827645
-// let string: number = value as number
-// console.log(string.toFixed(2))
-
-// function logger(value: unknown): void {
-// 	if (typeof value === 'string') {
-// 		console.log(`String: ${value}`)
-// 	} else if (typeof value === 'number') {
-// 		console.log(`Number: ${value}`)
-// 	} else if (Array.isArray(value)) {
-// 		console.log(`Array: ${value.join(', ')}`)
-// 	} else if (typeof value === 'object' && value !== null) {
-// 		console.log(`Object: ${JSON.stringify(value)}`)
-// 	} else {
-// 		console.log('Unknown type')
-// 	}
-// }
-
-// logger('Hello, world!')
-// logger(42)
-// logger([1, 2, 3])
-// logger({ key: 'value' })
-// logger(null)
-// logger(undefined)
-// logger(true)
+fetchData()

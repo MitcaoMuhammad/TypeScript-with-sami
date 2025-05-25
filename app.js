@@ -1,32 +1,29 @@
 "use strict";
-let person = {
-    name: 'John',
-    age: 30,
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
 };
-if (typeof person === 'object') {
-    const obj = person;
-    console.log(`Name: ${obj.name}, Age: ${obj.age}`);
+function throwError(message) {
+    throw new Error('This is an error from the throwError function.');
 }
-// let value: unknown = 20.514224827645
-// let string: number = value as number
-// console.log(string.toFixed(2))
-// function logger(value: unknown): void {
-// 	if (typeof value === 'string') {
-// 		console.log(`String: ${value}`)
-// 	} else if (typeof value === 'number') {
-// 		console.log(`Number: ${value}`)
-// 	} else if (Array.isArray(value)) {
-// 		console.log(`Array: ${value.join(', ')}`)
-// 	} else if (typeof value === 'object' && value !== null) {
-// 		console.log(`Object: ${JSON.stringify(value)}`)
-// 	} else {
-// 		console.log('Unknown type')
-// 	}
-// }
-// logger('Hello, world!')
-// logger(42)
-// logger([1, 2, 3])
-// logger({ key: 'value' })
-// logger(null)
-// logger(undefined)
-// logger(true)
+function fetchData() {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const response = yield fetch('https://jsonplaceholder.typicode.com/users');
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            const data = yield response.json();
+            console.log('Data fetched successfully:', data);
+        }
+        catch (error) {
+            throwError('Failed to fetch data: ' + error);
+        }
+    });
+}
+fetchData();
