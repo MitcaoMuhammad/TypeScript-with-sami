@@ -1,60 +1,30 @@
-// interface Person {
-// 	[key: string]: string | number
+interface Calc {
+	a: number
+	b?: number
+}
+
+function calc({ a, b = 2 }: Calc) {
+	return a + b
+}
+
+const result = calc({ a: 5, b: 3 })
+console.log(result) // Output: 8
+
+// function logger(text: string, callback: (message: string) => void) {
+// 	console.log(text)
+// 	callback(`Logged: ${text}`)
 // }
 
-// const person: Person = {
-// 	firstName: 'John',
-// 	lastName: 'Doe',
-// 	age: 30,
-// 	country: 'USA',
+// logger('Hello, World!', message => {
+// 	console.log(message)
+// })
+
+// let unusable: void
+
+// unusable = undefined // valid
+
+// function logger(): void {
+// 	return
 // }
 
-// type Logger = (message: string) => void
-
-// interface Person {
-// 	readonly firstName: string
-// 	readonly lastName: string
-// 	role: string
-// 	logger: Logger
-// }
-
-// let persons: Person = {
-// 	firstName: 'John',
-// 	lastName: 'Doe',
-// 	role: 'Developer',
-// 	logger: (message: string) => {
-// 		console.log(`Log: ${message}`)
-// 	},
-// }
-
-// persons.role = 'user'
-
-// console.log(persons)
-
-// interface Employee {
-// 	company: string
-// 	position: string
-// }
-
-// interface WorkerPerson extends Person, Employee {
-// 	age: number
-// }
-
-// let persons: WorkerPerson[] = [
-// 	{
-// 		firstName: 'John',
-// 		lastName: 'Doe',
-// 		age: 30,
-// 		company: 'Tech Corp',
-// 		position: 'Developer',
-// 	},
-// 	{
-// 		firstName: 'Jane',
-// 		lastName: 'Smith',
-// 		age: 25,
-// 		company: 'Health Inc',
-// 		position: 'Nurse',
-// 	},
-// ]
-
-// console.log(persons)
+// logger()
