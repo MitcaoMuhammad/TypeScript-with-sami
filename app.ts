@@ -1,34 +1,23 @@
-let data: (string | number)[] = ['Alice', 30, 'Bob', 25, 'Charlie', 35]
+type Status = 'success' | 'error'
 
-// Type Narrowing - turni tekshirish
+function getStatus(status: Status): Status {
+	if (status === 'success') {
+		return 'success'
+	}
+	return 'error'
+}
 
-// function logError(error: { message: string } | { error: string }) {
-// 	if ('message' in error) {
-// 		console.log(`Error message: ${error.message}`)
-// 	} else {
-// 		console.log(`Error: ${error.error}`)
-// 	}
-// }
+console.log(getStatus('success')) // Output: 'success'
+console.log(getStatus('error')) // Output: 'error'
 
-// logError({ message: 'Something went wrong!' })
-// logError({ error: 'Failed to connect to the server.' })
+// let isMarried: true
+// isMarried = true
 
-// function getVal(value: string | number): string | number {
-// 	if (typeof value === 'string') {
-// 		return value.toUpperCase()
-// 	} else if (typeof value === 'number') {
-// 		return value.toFixed(2)
-// 	}
+// let code: 200| 400 | 500 = 200
+// code = 400
 
-// 	return `Unknown type: ${value}`
-// }
+// let statusMessage: 'success' | 'error' | 'loading' = 'loading'
+// statusMessage = 'success'
 
-// console.log(getVal('hello'))
-// console.log(getVal(123.456))
-
-// function printID(id: number | string): void {
-// 	console.log(`The ID is: ${id}`)
-// }
-
-// printID(101)
-// printID('202A')
+// literal type - turli turdaki qiymatlar uchun ishlatiladi
+// union type - aniq turdagi qiymatlarni qabul qiladi

@@ -1,27 +1,17 @@
 "use strict";
-let data = ['Alice', 30, 'Bob', 25, 'Charlie', 35];
-// Type Narrowing - turni tekshirish
-// function logError(error: { message: string } | { error: string }) {
-// 	if ('message' in error) {
-// 		console.log(`Error message: ${error.message}`)
-// 	} else {
-// 		console.log(`Error: ${error.error}`)
-// 	}
-// }
-// logError({ message: 'Something went wrong!' })
-// logError({ error: 'Failed to connect to the server.' })
-// function getVal(value: string | number): string | number {
-// 	if (typeof value === 'string') {
-// 		return value.toUpperCase()
-// 	} else if (typeof value === 'number') {
-// 		return value.toFixed(2)
-// 	}
-// 	return `Unknown type: ${value}`
-// }
-// console.log(getVal('hello'))
-// console.log(getVal(123.456))
-// function printID(id: number | string): void {
-// 	console.log(`The ID is: ${id}`)
-// }
-// printID(101)
-// printID('202A')
+function getStatus(status) {
+    if (status === 'success') {
+        return 'success';
+    }
+    return 'error';
+}
+console.log(getStatus('success')); // Output: 'success'
+console.log(getStatus('error')); // Output: 'error'
+// let isMarried: true
+// isMarried = true
+// let code: 200| 400 | 500 = 200
+// code = 400
+// let statusMessage: 'success' | 'error' | 'loading' = 'loading'
+// statusMessage = 'success'
+// literal type - turli turdaki qiymatlar uchun ishlatiladi
+// union type - aniq turdagi qiymatlarni qabul qiladi
