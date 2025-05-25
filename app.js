@@ -1,17 +1,52 @@
 "use strict";
-function getStatus(status) {
-    if (status === 'success') {
-        return 'success';
-    }
-    return 'error';
-}
-console.log(getStatus('success')); // Output: 'success'
-console.log(getStatus('error')); // Output: 'error'
-// let isMarried: true
-// isMarried = true
-// let code: 200| 400 | 500 = 200
-// code = 400
-// let statusMessage: 'success' | 'error' | 'loading' = 'loading'
-// statusMessage = 'success'
-// literal type - turli turdaki qiymatlar uchun ishlatiladi
-// union type - aniq turdagi qiymatlarni qabul qiladi
+let persons = [
+    { firstName: 'John', lastName: 'Doe' },
+    { firstName: 'Jane', lastName: 'Smith' },
+];
+console.log(persons);
+// type Employee = {
+// 	company: string
+// 	position: string
+// }
+// type CompanyWorker = Person & Employee
+// let worker1: CompanyWorker = {
+// 	firstName: 'Alice',
+// 	lastName: 'Johnson',
+// 	company: 'TechCorp',
+// 	position: 'Software Engineer',
+// }
+// let employee1: Employee = {
+// 	company: 'TechCorp',
+// 	position: 'Software Engineer',
+// }
+// let person1: Person = {
+// 	firstName: 'Alice',
+// 	lastName: 'Johnson',
+// }
+// type Logger = (message: string) => string
+// const log: Logger = message => {
+// 	return message.toUpperCase()
+// }
+// console.log(log('Hello, TypeScript!'))
+// import { Person } from './app.types'
+// const person1: Person = {
+// 	firstName: 'John',
+// 	lastName: 'Doe',
+// 	age: 30,
+// 	skills: ['JavaScript', 'TypeScript', 'React'],
+// }
+// const person2: Person = {
+// 	firstName: 'Jane',
+// 	lastName: 'Smith',
+// 	age: 25,
+// 	skills: ['Python', 'Django', 'Flask'],
+// }
+// console.log(person1)
+// console.log(person2)
+// type ID = string | number
+// let userId: ID
+// userId = 123
+// userId = '123'
+// let productId: ID
+// productId = 456
+// productId = '456'

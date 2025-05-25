@@ -1,23 +1,77 @@
-type Status = 'success' | 'error'
-
-function getStatus(status: Status): Status {
-	if (status === 'success') {
-		return 'success'
-	}
-	return 'error'
+type Person = {
+	firstName: string
+	lastName: string
+	wife?: Person
 }
 
-console.log(getStatus('success')) // Output: 'success'
-console.log(getStatus('error')) // Output: 'error'
+type PersonList = Person[]
 
-// let isMarried: true
-// isMarried = true
+let persons: PersonList = [
+	{ firstName: 'John', lastName: 'Doe' },
+	{ firstName: 'Jane', lastName: 'Smith' },
+]
 
-// let code: 200| 400 | 500 = 200
-// code = 400
+console.log(persons)
 
-// let statusMessage: 'success' | 'error' | 'loading' = 'loading'
-// statusMessage = 'success'
+// type Employee = {
+// 	company: string
+// 	position: string
+// }
 
-// literal type - turli turdaki qiymatlar uchun ishlatiladi
-// union type - aniq turdagi qiymatlarni qabul qiladi
+// type CompanyWorker = Person & Employee
+
+// let worker1: CompanyWorker = {
+// 	firstName: 'Alice',
+// 	lastName: 'Johnson',
+// 	company: 'TechCorp',
+// 	position: 'Software Engineer',
+// }
+
+// let employee1: Employee = {
+// 	company: 'TechCorp',
+// 	position: 'Software Engineer',
+// }
+
+// let person1: Person = {
+// 	firstName: 'Alice',
+// 	lastName: 'Johnson',
+// }
+
+// type Logger = (message: string) => string
+
+// const log: Logger = message => {
+// 	return message.toUpperCase()
+// }
+
+// console.log(log('Hello, TypeScript!'))
+
+// import { Person } from './app.types'
+
+// const person1: Person = {
+// 	firstName: 'John',
+// 	lastName: 'Doe',
+// 	age: 30,
+// 	skills: ['JavaScript', 'TypeScript', 'React'],
+// }
+
+// const person2: Person = {
+// 	firstName: 'Jane',
+// 	lastName: 'Smith',
+// 	age: 25,
+// 	skills: ['Python', 'Django', 'Flask'],
+// }
+
+// console.log(person1)
+// console.log(person2)
+
+// type ID = string | number
+
+// let userId: ID
+
+// userId = 123
+// userId = '123'
+
+// let productId: ID
+
+// productId = 456
+// productId = '456'
