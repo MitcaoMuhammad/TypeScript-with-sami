@@ -15,12 +15,14 @@ class Payment {
 	status: Status
 	craatedAt: Date
 	updatedAt: Date
+	providers: string[]
 
 	constructor(id: Provider) {
 		this.id = id
 		this.status = Status.Pending
 		this.craatedAt = new Date()
 		this.updatedAt = new Date()
+		this.providers = []
 	}
 
 	getLifeTime(): number {
@@ -34,33 +36,21 @@ class Payment {
 		this.status = Status.Rejected
 		this.updatedAt = new Date()
 	}
+
+	getProviders(provider: string): void
+	getProviders(providers: string[]): void
+	getProviders(providerOrProviders: string | string[]): void {
+		if (typeof providerOrProviders === 'string') {
+			this.providers.push(providerOrProviders)
+		} else if (Array.isArray(providerOrProviders)) {
+			this.providers = this.providers.concat(providerOrProviders)
+		}
+	}
 }
 
 const payme = new Payment(Provider.Payme)
-payme.status = Status.Approvd
-setTimeout(() => {
-	payme.rejectPayment()
-	console.log(payme)
-	const duration = payme.getLifeTime()
-	console.log(duration)
-	console.log(payme)
-}, 1000)
 
-// class Person {
-// 	name: string
-
-// 	constructor(name: string) {
-// 		this.name = name
-// 	}
-
-// 	greeting(age: number): string {
-// 		return `Hello ${this.name}, you are ${age} years old!`
-// 	}
-// }
-
-// const user1 = new Person('Muhammad')
-// user1.greeting(17)
-
-// const user2 = new Person('Abdulbosit')
-// console.log(user2)
-// user2.greeting(17)
+payme.getProviders('Payme')
+console.log(payme.providers) // ['Payme']
+payme.getProviders(['Click', 'Uzum'])
+console.log(payme.providers) // ['Payme', 'Click', 'Uzum']
