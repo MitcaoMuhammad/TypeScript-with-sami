@@ -1,23 +1,66 @@
-class Car {
-	name!: string
-	year!: Date
+enum Provider {
+	Payme,
+	Click,
+	Uzum,
+}
 
-	constructor(name: string, year: Date)
-	constructor(data: { name: string; year: Date })
+enum Status {
+	Pending,
+	Approvd,
+	Rejected,
+}
 
-	constructor(nameOrData: string | { name: string; year: Date }, year?: Date) {
-		if (typeof nameOrData === 'string') {
-			this.name = nameOrData
-			this.year = year!
-		} else if (typeof nameOrData === 'object') {
-			this.name = nameOrData.name
-			this.year = nameOrData.year
+class Payment {
+	id: Provider
+	status: Status
+	craatedAt: Date
+	updatedAt: Date
+
+	constructor(id: Provider) {
+		this.id = id
+		this.status = Status.Pending
+		this.craatedAt = new Date()
+		this.updatedAt = new Date()
+	}
+
+	getLifeTime(): number {
+		return new Date().getTime() - this.craatedAt.getTime()
+	}
+
+	rejectPayment() {
+		if (this.status === Status.Approvd) {
+			throw new Error('Payment already approved, cannot be rejected.')
 		}
+		this.status = Status.Rejected
+		this.updatedAt = new Date()
 	}
 }
 
-const toyota = new Car('Toyota', new Date(2020, 0, 1))
-console.log(toyota)
+const payme = new Payment(Provider.Payme)
+payme.status = Status.Approvd
+setTimeout(() => {
+	payme.rejectPayment()
+	console.log(payme)
+	const duration = payme.getLifeTime()
+	console.log(duration)
+	console.log(payme)
+}, 1000)
 
-const chevrolet = new Car({ name: 'Chevrolet', year: new Date(2021, 0, 1) })
-console.log(chevrolet)
+// class Person {
+// 	name: string
+
+// 	constructor(name: string) {
+// 		this.name = name
+// 	}
+
+// 	greeting(age: number): string {
+// 		return `Hello ${this.name}, you are ${age} years old!`
+// 	}
+// }
+
+// const user1 = new Person('Muhammad')
+// user1.greeting(17)
+
+// const user2 = new Person('Abdulbosit')
+// console.log(user2)
+// user2.greeting(17)
