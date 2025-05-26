@@ -1,56 +1,17 @@
-enum Provider {
-	Payme,
-	Click,
-	Uzum,
-}
+class Employee {
+	private _salary: number
+	_password: string
 
-enum Status {
-	Pending,
-	Approvd,
-	Rejected,
-}
-
-class Payment {
-	id: Provider
-	status: Status
-	craatedAt: Date
-	updatedAt: Date
-	providers: string[]
-
-	constructor(id: Provider) {
-		this.id = id
-		this.status = Status.Pending
-		this.craatedAt = new Date()
-		this.updatedAt = new Date()
-		this.providers = []
+	set salary(value: number) {
+		this._salary = value / 100
 	}
 
-	getLifeTime(): number {
-		return new Date().getTime() - this.craatedAt.getTime()
-	}
-
-	rejectPayment() {
-		if (this.status === Status.Approvd) {
-			throw new Error('Payment already approved, cannot be rejected.')
-		}
-		this.status = Status.Rejected
-		this.updatedAt = new Date()
-	}
-
-	getProviders(provider: string): void
-	getProviders(providers: string[]): void
-	getProviders(providerOrProviders: string | string[]): void {
-		if (typeof providerOrProviders === 'string') {
-			this.providers.push(providerOrProviders)
-		} else if (Array.isArray(providerOrProviders)) {
-			this.providers = this.providers.concat(providerOrProviders)
-		}
+	get salary(): number {
+		return this._salary
 	}
 }
 
-const payme = new Payment(Provider.Payme)
-
-payme.getProviders('Payme')
-console.log(payme.providers) // ['Payme']
-payme.getProviders(['Click', 'Uzum'])
-console.log(payme.providers) // ['Payme', 'Click', 'Uzum']
+const John = new Employee()
+John.salary = 50000
+const salary = John.salary
+console.log(salary) // 500
