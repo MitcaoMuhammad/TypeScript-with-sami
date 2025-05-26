@@ -1,47 +1,81 @@
 "use strict";
-function throwError(message) {
-    throw new Error(message);
+var Role;
+(function (Role) {
+    Role[Role["Admin"] = 0] = "Admin";
+    Role[Role["STUDENT"] = 1] = "STUDENT";
+})(Role || (Role = {}));
+function isAdmin(user) {
+    return user.role === Role.Admin;
 }
-function isNumber(value) {
-    if (typeof value !== 'number') {
-        throwError('Value is not a number');
+const courses = [];
+function addCourse(user, course) {
+    if (isAdmin(user)) {
+        courses.push(course);
+        console.log(`Course added ${course.title} `);
+    }
+    else {
+        console.log('only admin can add courses');
     }
 }
-const age = '25';
-isNumber(age); // This will throw an error if age is not a number
-console.log(`Age is: ${age}`); // This line will not execute if age is not a number
-// type Car = { speed: number }
-// type Plane = { altitude: number }
-// function getInfo(vehicle: Car | Plane) {
-// 	if ('speed' in vehicle) {
-// 		console.log(`Car speed: ${vehicle.speed} km/h`)
-// 	} else if ('altitude' in vehicle) {
-// 		console.log(`Plane altitude: ${vehicle.altitude} m`)
-// 	}
-// }
-// getInfo({ speed: 120 }) // Outputs: Car speed: 120 km/h
-// getInfo({ altitude: 3000 }) // Outputs: Plane altitude: 3000 m
-// class Dog {
-// 	bark() {
-// 		console.log('Woof!')
-// 	}
-// }
-// class Cat {
-// 	meow() {
-// 		console.log('Meow!')
-// 	}
-// }
-// function makeSound(animal: Dog | Cat) {
-// 	if (animal instanceof Dog) {
-// 		animal.bark()
-// 	} else if (animal instanceof Cat) {
-// 		animal.meow()
-// 	}
-// }
-// makeSound(new Dog()) // Outputs: Woof!
-// makeSound(new Cat()) // Outputs: Meow!
-// let message: unknown = 123
-// let strLength1: string = <string>message
-// console.log(strLength1.length)
-// let strLength2: string = message as string
-// console.log(strLength1.length)
+function enrollStudent(user, courseId) {
+    const course = courses.find(course => course.id === courseId);
+    if (!course) {
+        console.log('Course not found');
+        return;
+    }
+    if (user.role === Role.STUDENT) {
+        course.students.push(user);
+        console.log(`student enrolled ${user.name}`);
+    }
+    else {
+        console.log('only students can enroll');
+    }
+}
+function listStudents(user, courseId) {
+    if (!isAdmin(user)) {
+        console.log('only admin can see list students');
+        return;
+    }
+    const course = courses.find(course => course.id === courseId);
+    if (!course) {
+        console.log('course not found');
+        return;
+    }
+    console.log(`students in  ${course.title}: ${course.students
+        .map(s => s.name)
+        .join(', ')}`);
+}
+// data
+const admin = {
+    id: 1,
+    name: 'Admin User',
+    role: Role.Admin,
+};
+const student1 = {
+    id: 2,
+    name: 'Student One',
+    role: Role.STUDENT,
+};
+const student2 = {
+    id: 3,
+    name: 'Student Two',
+    role: Role.STUDENT,
+};
+const course1 = {
+    id: 1,
+    title: 'TypeScript Basics',
+    description: 'Learn the basics of TypeScript',
+    students: [],
+};
+const course2 = {
+    id: 2,
+    title: 'Advanced TypeScript',
+    description: 'Deep dive into TypeScript features',
+    students: [],
+};
+// calling functions
+addCourse(admin, course1);
+enrollStudent(student1, 1);
+enrollStudent(student2, 1);
+listStudents(admin, 1);
+console.log(courses);
