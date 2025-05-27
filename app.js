@@ -1,58 +1,34 @@
 "use strict";
-// public = tashqi kodlardan foydalanish mumkin
-// private = faqatgina class nining o'zida foydalanish mumkin
-// protected = faqatgina class nining o'zida va undan meros olgan classlarda foydalanish mumkin
-class Person {
-    constructor(age) {
-        this.age = age;
-    }
-}
-class Employee extends Person {
-    constructor(name, age, salary) {
-        super(age);
-        this.name = name;
-        this.salary = salary;
-    }
-    getBonus() {
-        return this.salary * 0.2;
-    }
-    showAge() {
-        return this.age;
-    }
-}
-const employee = new Employee('John', 30, 50000);
-console.log(`Employee Name: ${employee.name}`); // Employee Name: John
-console.log(`Employee Age: ${employee.showAge()}`); // Employee Age: 30
-console.log(`Employee Bonus: ${employee.getBonus()}`); // Employee Bonus: 10000
-// class User {
-// 	name: string
-// 	constructor(name: string) {
-// 		this.name = name
+// class Parent {
+// 	static message: string = 'Hello from Parent class'
+// }
+// class Child extends Parent {}
+// console.log(Child.message) // Accessing static property from Child class
+// class Counter {
+// 	static count = 0
+// 	private static secretKey: string = '123456'
+// 	title: string
+// 	constructor(title: string) {
+// 		this.title = title
 // 	}
-// 	sayHello() {
-// 		console.log`Hello, my name is ${this.name}`
+// 	static increment() {
+// 		this.count++
+// 	}
+// 	static add(a: number, b: number) {
+// 		return a + b
+// 	}
+// 	static getSecretKey() {
+// 		return this.secretKey
+// 	}
+// 	gerTitle() {
+// 		return this.title
 // 	}
 // }
-// class Payment {
-// 	amount: number
-// 	constructor(amount: number) {
-// 		this.amount = amount
-// 	}
-// 	pay() {
-// 		console.log(`Payment of ${this.amount} made.`)
-// 	}
-// }
-// class UserWithPayment {
-// 	user: User
-// 	payment: Payment
-// 	constructor(user: User, payment: Payment) {
-// 		this.user = user
-// 		this.payment = payment
-// 	}
-// 	showInfo() {
-// 		this.user.sayHello()
-// 		this.payment.pay()
-// 	}
-// }
-// const userWithPayment = new UserWithPayment(new User('Alice'), new Payment(100))
-// userWithPayment.showInfo()
+// const c = new Counter('Counter 1')
+// console.log(c.title)
+// console.log(Counter.count)
+// Counter.increment()
+// console.log(Counter.count)
+// console.log(Counter.add(5, 10))
+// console.log(Counter.count)
+// console.log(Counter.getSecretKey())
