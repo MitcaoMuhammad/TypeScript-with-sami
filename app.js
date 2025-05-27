@@ -1,4 +1,20 @@
 "use strict";
+class Animal {
+    constructor(name) {
+        this.name = name;
+    }
+    move() {
+        console.log(`${this.name} is moving`);
+    }
+}
+class Cat extends Animal {
+    makeSound() {
+        console.log(`${this.name} says Meow`);
+    }
+}
+const cat = new Cat('Tom');
+cat.makeSound(); // Tom says Meow
+cat.move(); // Tom is moving
 // class Parent {
 // 	static message: string = 'Hello from Parent class'
 // }

@@ -1,3 +1,32 @@
+interface IAnimal {
+	makeSound(): void
+	move(): void
+}
+
+interface IBird {
+	fly(): void
+}
+
+abstract class Animal {
+	constructor(public name: string) {}
+
+	abstract makeSound(): void
+
+	move(): void {
+		console.log(`${this.name} is moving`)
+	}
+}
+
+class Cat extends Animal {
+	makeSound(): void {
+		console.log(`${this.name} says Meow`)
+	}
+}
+
+const cat = new Cat('Tom')
+cat.makeSound() // Tom says Meow
+cat.move() // Tom is moving
+
 // class Parent {
 // 	static message: string = 'Hello from Parent class'
 // }
