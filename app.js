@@ -1,54 +1,58 @@
 "use strict";
-class Shope {
-    constructor(color) {
-        this.color = color;
-    }
-    describe() {
-        console.log(`This shop is ${this.color}.`);
-    }
-}
-class Cricle extends Shope {
-    constructor(color, radius) {
-        super(color);
-        this.radius = radius;
-    }
-    describe() {
-        super.describe();
-        console.log(`It has a radius of ${this.radius} meters.`);
-    }
-    area() {
-        return Math.PI * this.radius ** 2;
+// public = tashqi kodlardan foydalanish mumkin
+// private = faqatgina class nining o'zida foydalanish mumkin
+// protected = faqatgina class nining o'zida va undan meros olgan classlarda foydalanish mumkin
+class Person {
+    constructor(age) {
+        this.age = age;
     }
 }
-const myCircle = new Cricle('red', 5);
-myCircle.describe();
-console.log(myCircle.area());
-// class Animal {
-// 	id: number
+class Employee extends Person {
+    constructor(name, age, salary) {
+        super(age);
+        this.name = name;
+        this.salary = salary;
+    }
+    getBonus() {
+        return this.salary * 0.2;
+    }
+    showAge() {
+        return this.age;
+    }
+}
+const employee = new Employee('John', 30, 50000);
+console.log(`Employee Name: ${employee.name}`); // Employee Name: John
+console.log(`Employee Age: ${employee.showAge()}`); // Employee Age: 30
+console.log(`Employee Bonus: ${employee.getBonus()}`); // Employee Bonus: 10000
+// class User {
 // 	name: string
-// 	constructor(id: number, name: string) {
-// 		this.id = id
+// 	constructor(name: string) {
 // 		this.name = name
 // 	}
-// 	speak() {
-// 		this.id = 10 * this.id
-// 		console.log(`${this.name} makes a sound.`)
+// 	sayHello() {
+// 		console.log`Hello, my name is ${this.name}`
+// 	}
+// }
+// class Payment {
+// 	amount: number
+// 	constructor(amount: number) {
+// 		this.amount = amount
+// 	}
+// 	pay() {
+// 		console.log(`Payment of ${this.amount} made.`)
+// 	}
+// }
+// class UserWithPayment {
+// 	user: User
+// 	payment: Payment
+// 	constructor(user: User, payment: Payment) {
+// 		this.user = user
+// 		this.payment = payment
 // 	}
 // 	showInfo() {
-// 		console.log(`Animal ID: ${this.id}, Name: ${this.name}`)
+// 		this.user.sayHello()
+// 		this.payment.pay()
 // 	}
 // }
-// class Cat extends Animal {
-// 	constructor(name: string) {
-// 		const id = Math.random() * 1000
-// 		super(id, name)
-// 	}
-// 	override speak() {
-// 		super.speak()
-// 		console.log(`${this.name} Meow!`)
-// 	}
-// }
-// const cat = new Cat('Whiskers')
-// const id = cat.id
-// cat.speak()
-// cat.showInfo()
+// const userWithPayment = new UserWithPayment(new User('Alice'), new Payment(100))
+// userWithPayment.showInfo()
