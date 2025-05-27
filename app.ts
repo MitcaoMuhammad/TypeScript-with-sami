@@ -1,39 +1,70 @@
-interface Drivable {
-	startEngine(): void
-	drive(speed: number): void
-	model: string
-}
+class Shope {
+	color: string
 
-interface Flyable {
-	fly(speed: number): void
-}
-
-class Car implements Drivable, Flyable {
-	model: string
-
-	constructor(model: string) {
-		this.model = model
+	constructor(color: string) {
+		this.color = color
 	}
 
-	startEngine(): void {
-		console.log(`${this.model} engine started.`)
-	}
-
-	drive(speed: number): void {
-		console.log(`${this.model}: driving at ${speed} km/hr.`)
-	}
-
-	fly(speed: number): void {
-		console.log(`${this.model}: flying at ${speed} km/hr.`)
+	describe() {
+		console.log(`This shop is ${this.color}.`)
 	}
 }
 
-const Toyota = new Car('Toyota')
-Toyota.startEngine()
-Toyota.drive(100)
-Toyota.fly(200)
+class Cricle extends Shope {
+	radius: number
 
-const Honda = new Car('Honda')
-Honda.startEngine()
-Honda.drive(120)
-Honda.fly(250)
+	constructor(color: string, radius: number) {
+		super(color)
+		this.radius = radius
+	}
+
+	describe() {
+		super.describe()
+		console.log(`It has a radius of ${this.radius} meters.`)
+	}
+
+	area() {
+		return Math.PI * this.radius ** 2
+	}
+}
+
+const myCircle = new Cricle('red', 5)
+
+myCircle.describe()
+console.log(myCircle.area())
+
+// class Animal {
+// 	id: number
+// 	name: string
+
+// 	constructor(id: number, name: string) {
+// 		this.id = id
+// 		this.name = name
+// 	}
+
+// 	speak() {
+// 		this.id = 10 * this.id
+// 		console.log(`${this.name} makes a sound.`)
+// 	}
+
+// 	showInfo() {
+// 		console.log(`Animal ID: ${this.id}, Name: ${this.name}`)
+// 	}
+// }
+
+// class Cat extends Animal {
+// 	constructor(name: string) {
+// 		const id = Math.random() * 1000
+// 		super(id, name)
+// 	}
+
+// 	override speak() {
+// 		super.speak()
+// 		console.log(`${this.name} Meow!`)
+// 	}
+// }
+
+// const cat = new Cat('Whiskers')
+// const id = cat.id
+// cat.speak()
+// cat.showInfo()
