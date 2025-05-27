@@ -1,17 +1,39 @@
-class Employee {
-	private _salary: number
-	_password: string
+interface Drivable {
+	startEngine(): void
+	drive(speed: number): void
+	model: string
+}
 
-	set salary(value: number) {
-		this._salary = value / 100
+interface Flyable {
+	fly(speed: number): void
+}
+
+class Car implements Drivable, Flyable {
+	model: string
+
+	constructor(model: string) {
+		this.model = model
 	}
 
-	get salary(): number {
-		return this._salary
+	startEngine(): void {
+		console.log(`${this.model} engine started.`)
+	}
+
+	drive(speed: number): void {
+		console.log(`${this.model}: driving at ${speed} km/hr.`)
+	}
+
+	fly(speed: number): void {
+		console.log(`${this.model}: flying at ${speed} km/hr.`)
 	}
 }
 
-const John = new Employee()
-John.salary = 50000
-const salary = John.salary
-console.log(salary) // 500
+const Toyota = new Car('Toyota')
+Toyota.startEngine()
+Toyota.drive(100)
+Toyota.fly(200)
+
+const Honda = new Car('Honda')
+Honda.startEngine()
+Honda.drive(120)
+Honda.fly(250)

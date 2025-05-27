@@ -1,13 +1,23 @@
 "use strict";
-class Employee {
-    set salary(value) {
-        this._salary = value / 100;
+class Car {
+    constructor(model) {
+        this.model = model;
     }
-    get salary() {
-        return this._salary;
+    startEngine() {
+        console.log(`${this.model} engine started.`);
+    }
+    drive(speed) {
+        console.log(`${this.model}: driving at ${speed} km/hr.`);
+    }
+    fly(speed) {
+        console.log(`${this.model}: flying at ${speed} km/hr.`);
     }
 }
-const John = new Employee();
-John.salary = 50000;
-const salary = John.salary;
-console.log(salary); // 500
+const Toyota = new Car('Toyota');
+Toyota.startEngine();
+Toyota.drive(100);
+Toyota.fly(200);
+const Honda = new Car('Honda');
+Honda.startEngine();
+Honda.drive(120);
+Honda.fly(250);
