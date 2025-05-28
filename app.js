@@ -1,22 +1,39 @@
 "use strict";
-var Rouls;
-(function (Rouls) {
-    Rouls[Rouls["ADMIN"] = 0] = "ADMIN";
-    Rouls[Rouls["USER"] = 1] = "USER";
-})(Rouls || (Rouls = {}));
-const roules = {
-    [Rouls.ADMIN]: 'admin',
-    [Rouls.USER]: 'user',
-};
-const users = [
-    {
-        name: 'John',
-        age: 30,
-    },
-    {
-        name: 'Jane',
-        age: 25,
-    },
-];
-const numbers = [1, 2, 3, 4, 5];
-const names = ['John', 30];
+function createShape(val) {
+    return { radius: val };
+}
+const firstShape = createShape(10);
+const secondShape = createShape('10');
+// interface IUser {
+// 	name: string
+// }
+// function getFirstElement<T>(arr: T[]): T {
+// 	return arr[0]
+// }
+// const firstName = getFirstElement<number>([1, 2, 3])
+// const firstString = getFirstElement<string>(['a', 'b', 'c'])
+// const firstUser = getFirstElement<IUser>([{ name: 'John' }, { name: 'Doe' }])
+// interface User {
+// 	name: string
+// }
+// interface Age {
+// 	age: number
+// }
+// interface Married {
+// 	isMarried: boolean
+// }
+// function merge<T, U, K>(obj1: T, obj2: U, obj3: K): T & U & K {
+// 	return { ...obj1, ...obj2, ...obj3 }
+// }
+// const user = merge<User, Age, Married>(
+// 	{ name: 'John' },
+// 	{ age: 30 },
+// 	{ isMarried: true }
+// )
+// console.log(user)
+// function identity<T, U>(x: T, y: U): [T, U] {
+// 	return [x, y]
+// }
+// const result = identity<string, number>('Helleo', 13)
+// const result1 = identity<string, number>('hello', 1)
+// const result2 = identity<boolean, string>(true, 'hello') // Inferred as [number, string]
