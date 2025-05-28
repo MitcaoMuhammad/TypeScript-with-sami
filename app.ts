@@ -1,52 +1,43 @@
-interface Shape<T> {
-	radius: T
+interface IUser {
+	id: number
+	name: string
+	username: string
+	email: string
 }
 
-function createShape<T = number>(val: T): Shape<T> {
-	return { radius: val }
+interface IPost {
+	id: number
+	title: string
+	body: string
+	userId: number
 }
 
-const firstShape = createShape<number>(10)
-const secondShape = createShape<string>('10')
+async function fetchData<T>(endpoint: string): Promise<T> {
+	try {
+		const response = await fetch(
+			`https://jsonplaceholder.typicode.com/${endpoint}`
+		)
 
-// interface IUser {
-// 	name: string
-// }
+		if (!response.ok) {
+			throw new Error('Network response was not ok')
+		}
 
-// function getFirstElement<T>(arr: T[]): T {
-// 	return arr[0]
-// }
+		const data: T = await response.json()
+		return data
+	} catch (error) {
+		throw new Error(`Failed to fetch data from ${endpoint}: ${error}`)
+	}
+}
 
-// const firstName = getFirstElement<number>([1, 2, 3])
-// const firstString = getFirstElement<string>(['a', 'b', 'c'])
-// const firstUser = getFirstElement<IUser>([{ name: 'John' }, { name: 'Doe' }])
+async function getUsers() {
+	const users = await fetchData<IUser[]>('users')
+	users.forEach(c => console.log(c.name))
+}
 
-// interface User {
-// 	name: string
-// }
-// interface Age {
-// 	age: number
-// }
-// interface Married {
-// 	isMarried: boolean
-// }
+async function getPosts() {
+	const posts = await fetchData<IPost[]>('posts')
+	posts.forEach(p => console.log(p.title))
+}
 
-// function merge<T, U, K>(obj1: T, obj2: U, obj3: K): T & U & K {
-// 	return { ...obj1, ...obj2, ...obj3 }
-// }
-
-// const user = merge<User, Age, Married>(
-// 	{ name: 'John' },
-// 	{ age: 30 },
-// 	{ isMarried: true }
-// )
-
-// console.log(user)
-
-// function identity<T, U>(x: T, y: U): [T, U] {
-// 	return [x, y]
-// }
-
-// const result = identity<string, number>('Helleo', 13)
-// const result1 = identity<string, number>('hello', 1)
-// const result2 = identity<boolean, string>(true, 'hello') // Inferred as [number, string]
+getPosts()
+getUsers()
