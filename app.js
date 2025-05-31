@@ -1,43 +1,25 @@
 "use strict";
-const config = {
-    apiUrl: 'https://api.example.com',
-    port: 3000,
-    debug: true,
-};
-function getConfigValue(key) {
-    return config[key];
-}
-console.log(getConfigValue('apiUrl')); // 'https://api.example.com'
-console.log(getConfigValue('port')); // 3000
-// typeof - qiymatning turini olish uchun ishlatiladi
-// keyof - obyektning kalitlarini olish uchun ishlatiladi
-// keyof typeof - obyektning kalitlarini olish uchun ishlatiladi, lekin obyektning turini ham aniqlaydi
-// const user = {
-// 	name: 'John Doe',
-// 	age: 30,
-// 	isMarried: false,
+// Indexed access type = tipdan proprtiy turuni olish - User['name] -> string
+// Conditional type = tipdan turli shartlarga qarab turli natija qaytarish - T extends U ? X : Y
+// interface IAdmin {
+// 	role: 'admin'
+// 	access: true
 // }
-// type User = typeof user
-// function logUser(user: User) {
-// 	console.log(user)
+// interface IGuest {
+// 	role: 'guest'
+// 	access: false
 // }
-// logUser(user)
-// type IUser = {
-// 	name: string
-// 	age: number
-// 	isMarried: boolean
-// }
-// type UserKeys = keyof IUser
-// function getUserKey(key: UserKeys) {
-// 	console.log(key)
-// }
-// getUserKey('age')
-// function getProperty<T, K extends keyof T>(obj: T, key: K): T[K] {
-// 	return obj[key]
-// }
-// const car = {
-// 	modal: 'Toyota',
-// 	year: 2020,
-// 	color: 'red',
-// }
-// const userName = getProperty(car, 'year')
+// type RoleAccess<T> = T extends { role: 'admin' } ? true : false
+// type AdminAccess = RoleAccess<IAdmin> // true
+// type GuestAccess = RoleAccess<IGuest> // false
+// // const user = {
+// // 	id: 1,
+// // 	name: 'John Doe',
+// // 	age: 30,
+// // 	isMarried: false,
+// // }
+// // function getProperty<T, K extends keyof T>(obj: T, key: K): T[K] {
+// // 	return obj[key]
+// // }
+// // const userName = getProperty(user, 'name') // Type is string
+// // const userAge = getProperty(user, 'age') // Type is number

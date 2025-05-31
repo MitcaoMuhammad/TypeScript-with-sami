@@ -1,58 +1,36 @@
-const config = {
-	apiUrl: 'https://api.example.com',
-	port: 3000,
-	debug: true,
-}
+type GetPropType<T, K extends keyof T> = T[K]
 
-type ConfigKeys = keyof typeof config
+type User = { name: string; age: number }
+type NameType = GetPropType<User, 'name'> // string
 
-function getConfigValue(key: ConfigKeys) {
-	return config[key]
-}
+// Indexed access type = tipdan proprtiy turuni olish - User['name] -> string
+// Conditional type = tipdan turli shartlarga qarab turli natija qaytarish - T extends U ? X : Y
 
-console.log(getConfigValue('apiUrl')) // 'https://api.example.com'
-console.log(getConfigValue('port')) // 3000
-
-// typeof - qiymatning turini olish uchun ishlatiladi
-// keyof - obyektning kalitlarini olish uchun ishlatiladi
-// keyof typeof - obyektning kalitlarini olish uchun ishlatiladi, lekin obyektning turini ham aniqlaydi
-
-// const user = {
-// 	name: 'John Doe',
-// 	age: 30,
-// 	isMarried: false,
+// interface IAdmin {
+// 	role: 'admin'
+// 	access: true
 // }
 
-// type User = typeof user
-
-// function logUser(user: User) {
-// 	console.log(user)
+// interface IGuest {
+// 	role: 'guest'
+// 	access: false
 // }
 
-// logUser(user)
+// type RoleAccess<T> = T extends { role: 'admin' } ? true : false
 
-// type IUser = {
-// 	name: string
-// 	age: number
-// 	isMarried: boolean
-// }
+// type AdminAccess = RoleAccess<IAdmin> // true
+// type GuestAccess = RoleAccess<IGuest> // false
 
-// type UserKeys = keyof IUser
+// // const user = {
+// // 	id: 1,
+// // 	name: 'John Doe',
+// // 	age: 30,
+// // 	isMarried: false,
+// // }
 
-// function getUserKey(key: UserKeys) {
-// 	console.log(key)
-// }
+// // function getProperty<T, K extends keyof T>(obj: T, key: K): T[K] {
+// // 	return obj[key]
+// // }
 
-// getUserKey('age')
-
-// function getProperty<T, K extends keyof T>(obj: T, key: K): T[K] {
-// 	return obj[key]
-// }
-
-// const car = {
-// 	modal: 'Toyota',
-// 	year: 2020,
-// 	color: 'red',
-// }
-
-// const userName = getProperty(car, 'year')
+// // const userName = getProperty(user, 'name') // Type is string
+// // const userAge = getProperty(user, 'age') // Type is number
