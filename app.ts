@@ -1,62 +1,23 @@
-interface HasId {
-	id?: number
-}
+class Shape<T, U> {
+	private content: T
+	radius: U
 
-interface HasUniqueId {
-	_id?: number
-}
+	constructor(content: T, radius: U) {
+		this.content = content
+		this.radius = radius
+	}
 
-const user = {
-	id: 1,
-	name: 'John',
-}
+	getContent(): T {
+		return this.content
+	}
 
-const product = {
-	id: 2,
-	title: 'Laptop',
-}
-
-const course = {
-	_id: 3,
-	title: 'TypeScript',
-}
-
-function getById<T extends HasId & HasUniqueId>(obj: T): number {
-	if (obj.id) {
-		return obj.id
-	} else if (obj._id) {
-		return obj._id
-	} else {
-		throw new Error('Object does not have an id or _id property')
+	getRadius(): U {
+		return this.radius
 	}
 }
 
-const userId = getById(user)
-const productId = getById(product)
-const courseId = getById(course)
-console.log(userId) // Output: 1
-console.log(productId) // Output: 2
-console.log(courseId) // Output: 3
+const shape = new Shape<string, number>('Circle', 5)
+console.log(shape.getContent()) // Output: Circle
 
-// function getProperty<T, K extends keyof T>(obj: T, key: K): T[K] {
-// 	return obj[key]
-// }
-
-// const user = {
-// 	id: 1,
-// 	name: 'John',
-// 	age: 30,
-// 	email: ' johndoe@gmail.com',
-// }
-
-// const userName = getProperty(user, 'name')
-// const userEmail = getProperty(user, 'email')
-// console.log(userEmail) // Output:
-// console.log(userName) // Output: John
-
-// function getLingth<T extends { length: number }>(item: T): number {
-// 	return item.length
-// }
-
-// console.log(getLingth('hello Worled'))
-// console.log(getLingth([1, 2, 3, 4, 5]))
+const shape2 = new Shape<number, string>(10, 'Large')
+console.log(shape2.getRadius()) // Output: Large
