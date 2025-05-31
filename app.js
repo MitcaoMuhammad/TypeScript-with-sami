@@ -1,39 +1,48 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
+const user = {
+    id: 1,
+    name: 'John',
 };
-function fetchData(endpoint) {
-    return __awaiter(this, void 0, void 0, function* () {
-        try {
-            const response = yield fetch(`https://jsonplaceholder.typicode.com/${endpoint}`);
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            const data = yield response.json();
-            return data;
-        }
-        catch (error) {
-            throw new Error(`Failed to fetch data from ${endpoint}: ${error}`);
-        }
-    });
+const product = {
+    id: 2,
+    title: 'Laptop',
+};
+const course = {
+    _id: 3,
+    title: 'TypeScript',
+};
+function getById(obj) {
+    if (obj.id) {
+        return obj.id;
+    }
+    else if (obj._id) {
+        return obj._id;
+    }
+    else {
+        throw new Error('Object does not have an id or _id property');
+    }
 }
-function getUsers() {
-    return __awaiter(this, void 0, void 0, function* () {
-        const users = yield fetchData('users');
-        users.forEach(c => console.log(c.name));
-    });
-}
-function getPosts() {
-    return __awaiter(this, void 0, void 0, function* () {
-        const posts = yield fetchData('posts');
-        posts.forEach(p => console.log(p.title));
-    });
-}
-getPosts();
-getUsers();
+const userId = getById(user);
+const productId = getById(product);
+const courseId = getById(course);
+console.log(userId); // Output: 1
+console.log(productId); // Output: 2
+console.log(courseId); // Output: 3
+// function getProperty<T, K extends keyof T>(obj: T, key: K): T[K] {
+// 	return obj[key]
+// }
+// const user = {
+// 	id: 1,
+// 	name: 'John',
+// 	age: 30,
+// 	email: ' johndoe@gmail.com',
+// }
+// const userName = getProperty(user, 'name')
+// const userEmail = getProperty(user, 'email')
+// console.log(userEmail) // Output:
+// console.log(userName) // Output: John
+// function getLingth<T extends { length: number }>(item: T): number {
+// 	return item.length
+// }
+// console.log(getLingth('hello Worled'))
+// console.log(getLingth([1, 2, 3, 4, 5]))

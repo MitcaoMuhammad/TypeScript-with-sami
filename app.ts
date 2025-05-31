@@ -1,43 +1,62 @@
-interface IUser {
-	id: number
-	name: string
-	username: string
-	email: string
+interface HasId {
+	id?: number
 }
 
-interface IPost {
-	id: number
-	title: string
-	body: string
-	userId: number
+interface HasUniqueId {
+	_id?: number
 }
 
-async function fetchData<T>(endpoint: string): Promise<T> {
-	try {
-		const response = await fetch(
-			`https://jsonplaceholder.typicode.com/${endpoint}`
-		)
+const user = {
+	id: 1,
+	name: 'John',
+}
 
-		if (!response.ok) {
-			throw new Error('Network response was not ok')
-		}
+const product = {
+	id: 2,
+	title: 'Laptop',
+}
 
-		const data: T = await response.json()
-		return data
-	} catch (error) {
-		throw new Error(`Failed to fetch data from ${endpoint}: ${error}`)
+const course = {
+	_id: 3,
+	title: 'TypeScript',
+}
+
+function getById<T extends HasId & HasUniqueId>(obj: T): number {
+	if (obj.id) {
+		return obj.id
+	} else if (obj._id) {
+		return obj._id
+	} else {
+		throw new Error('Object does not have an id or _id property')
 	}
 }
 
-async function getUsers() {
-	const users = await fetchData<IUser[]>('users')
-	users.forEach(c => console.log(c.name))
-}
+const userId = getById(user)
+const productId = getById(product)
+const courseId = getById(course)
+console.log(userId) // Output: 1
+console.log(productId) // Output: 2
+console.log(courseId) // Output: 3
 
-async function getPosts() {
-	const posts = await fetchData<IPost[]>('posts')
-	posts.forEach(p => console.log(p.title))
-}
+// function getProperty<T, K extends keyof T>(obj: T, key: K): T[K] {
+// 	return obj[key]
+// }
 
-getPosts()
-getUsers()
+// const user = {
+// 	id: 1,
+// 	name: 'John',
+// 	age: 30,
+// 	email: ' johndoe@gmail.com',
+// }
+
+// const userName = getProperty(user, 'name')
+// const userEmail = getProperty(user, 'email')
+// console.log(userEmail) // Output:
+// console.log(userName) // Output: John
+
+// function getLingth<T extends { length: number }>(item: T): number {
+// 	return item.length
+// }
+
+// console.log(getLingth('hello Worled'))
+// console.log(getLingth([1, 2, 3, 4, 5]))
