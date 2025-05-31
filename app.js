@@ -1,22 +1,21 @@
 "use strict";
-const product = {
-    name: 'shoes',
-    price: 100,
-    id: 1,
-    excerpt: 'A pair of running shoes',
-};
-// const products = {
-// 	name: 'shoes',
-// 	price: 100,
-// 	id: 1,
-// 	excerpt: 'A pair of running shoes',
+// interface IUser {
+// 	name: string
+// 	age: number
+// 	email: string
+// 	address: string
+// 	avatar: string
+// 	phone: string
+// 	password: string
+// 	secretKey: string
 // }
-// function createProduct(products: Required<IProduct>) {
-// 	console.log(products)
+// // type UserContactInfo = Pick<IUser, 'email' | 'phone'>;
+// type UserContactInfo = Omit<IUser, 'password' | 'secretKey'>
+// const user: UserContactInfo = {
+// 	address: '123 Main St',
+// 	avatar: 'https://example.com/avatar.jpg',
+// 	email: '',
+// 	phone: '',
+// 	age: 30,
+// 	name: 'John Doe',
 // }
-// createProduct(products)
-// function updateProduct(updateProduct: Partial<IProduct>) {
-// 	const updatedProduct: IProduct = { ...products, ...updateProduct }
-// 	console.log(updatedProduct)
-// }
-// updateProduct({ name: 'sneakers', price: 120 })
