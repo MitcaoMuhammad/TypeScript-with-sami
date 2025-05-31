@@ -1,36 +1,77 @@
-type GetPropType<T, K extends keyof T> = T[K]
+type FormDataType = {
+	email: string
+	password: string
+	name: string
+}
 
-type User = { name: string; age: number }
-type NameType = GetPropType<User, 'name'> // string
+type FormErrorType = {
+	email?: string
+	password?: string
+	name?: string
+}
 
-// Indexed access type = tipdan proprtiy turuni olish - User['name] -> string
-// Conditional type = tipdan turli shartlarga qarab turli natija qaytarish - T extends U ? X : Y
+function validateFormData<T extends FormDataType>(form: T): FormErrorType {
+	const errors: FormErrorType = {}
 
-// interface IAdmin {
-// 	role: 'admin'
-// 	access: true
-// }
+	if (!form.email) {
+		errors.email = 'Email is required'
+	} else if (!/\S+@\S+\.\S+/.test(form.email)) {
+		errors.email = 'Email is invalid'
+	}
 
-// interface IGuest {
-// 	role: 'guest'
-// 	access: false
-// }
+	if (!form.password) {
+		errors.password = 'Password is required'
+	} else if (form.password.length < 6) {
+		errors.password = 'Password must be at least 6 characters long'
+	}
 
-// type RoleAccess<T> = T extends { role: 'admin' } ? true : false
+	if (!form.name) {
+		errors.name = 'Name is required'
+	}
 
-// type AdminAccess = RoleAccess<IAdmin> // true
-// type GuestAccess = RoleAccess<IGuest> // false
+	return errors
+}
 
-// // const user = {
-// // 	id: 1,
-// // 	name: 'John Doe',
-// // 	age: 30,
-// // 	isMarried: false,
-// // }
+const formData: FormDataType = {
+	email: 'exemple@gmail.com',
+	password: '123456',
+	name: 'John Doe',
+}
 
-// // function getProperty<T, K extends keyof T>(obj: T, key: K): T[K] {
-// // 	return obj[key]
-// // }
+const errors = validateFormData(formData)
+console.log(errors)
 
-// // const userName = getProperty(user, 'name') // Type is string
-// // const userAge = getProperty(user, 'age') // Type is number
+type IsEmailValid<T> = T extends { email: string } ? boolean : never
+
+function isEmailValid<T extends FormDataType>(form: T): IsEmailValid<T> {
+	return /\S+@\S+\.\S+/.test(form.email) as IsEmailValid<T>
+}
+
+const emailValidation = isEmailValid(formData)
+console.log(emailValidation) // true
+
+type DynamicFormData = {
+	[key: string]: string
+}
+
+function validateDynamicFormData<T extends DynamicFormData>(
+	form: T
+): FormErrorType {
+	const errors: FormErrorType = {}
+	Object.keys(form).forEach(key => {
+		if (!form[key]) {
+			errors[key] = `${key} is required`
+		}
+	})
+	return errors
+}
+
+const dynamicFormData = {
+	email: 'test@gmail.com',
+	password: '123456',
+	name: 'John Doe',
+	customId: '',
+}
+
+const dynamicErrors = validateDynamicFormData(dynamicFormData)
+console.log(dynamicErrors) // { customId: 'customId is required' }
