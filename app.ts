@@ -1,41 +1,41 @@
+// Readonly = O'zgaruvchan tipni o'zgarmas qilib qo'yish yani faqat o'qish uchun
+// Required = O'zgaruvchan tipdagi barcha xususiyatlarni majburiy qilish
+// Partial = O'zgaruvchan tipdagi barcha xususiyatlarni ixtiyoriy qilish
 // Pick = Asosiy typdan kerakli xususiyatlarni tanlash
 // Omit = Asosiy typdan kerakli xususiyatlarni chiqarib tashlash
 // Extract = Ikkita tipdan umumiy xususiyatlarni olish
 // Exclude = Ikkita tipdan umumiy xususiyatlarni chiqarib tashlash
-interface IAnimal {
-	name: string
-	species: string
-	age: number
+// ReturnType = Funksiya tipidan qaytish tipini olish
+// Parameters = Funksiya tipidan parametrlar tipini olish
+// constructor parameters = classning konstruktoridagi parametrlar tipini olish
+// Awaited = Promise ichidagi tipni olish
+
+async function fetchData(): Promise<string> {
+	return 'Data'
 }
 
-interface IPlant {
-	name: string
-	color: string
-	age: number
-}
+type FetchDataReturnType = Awaited<ReturnType<typeof fetchData>> // string
+// type FetchDataReturnType = ReturnType<typeof fetchData> // string
 
-// type CommonProperties = Extract<keyof IAnimal, keyof IPlant>
-type CommonProperties = Exclude<keyof IAnimal, keyof IPlant>
+const data: FetchDataReturnType = 'data'
 
-// interface IUser {
-// 	name: string
-// 	age: number
-// 	email: string
-// 	address: string
-// 	avatar: string
-// 	phone: string
-// 	password: string
-// 	secretKey: string
+// class Person {
+// 	constructor(public name: string, public age: number) {}
 // }
 
-// // type UserContactInfo = Pick<IUser, 'email' | 'phone'>;
-// type UserContactInfo = Omit<IUser, 'password' | 'secretKey'>
+// type PersonConstructorParameters = ConstructorParameters<typeof Person> // [string, number]
 
-// const user: UserContactInfo = {
-// 	address: '123 Main St',
-// 	avatar: 'https://example.com/avatar.jpg',
-// 	email: '',
-// 	phone: '',
-// 	age: 30,
-// 	name: 'John Doe',
+// const personParams: PersonConstructorParameters = ['John', 30]
+// const person = new Person(...personParams)
+
+// function add(a: number, b: number): number {
+// 	return a + b
 // }
+
+// type AddReturnType = ReturnType<typeof add> // number
+// type AddParametersType = Parameters<typeof add> // [number, number]
+
+// const params: AddParametersType = [5, 10]
+
+// const result: AddReturnType = add(...params)
+// console.log(result) // 15
