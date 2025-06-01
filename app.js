@@ -1,42 +1,80 @@
 "use strict";
-// Readonly = O'zgaruvchan tipni o'zgarmas qilib qo'yish yani faqat o'qish uchun
-// Required = O'zgaruvchan tipdagi barcha xususiyatlarni majburiy qilish
-// Partial = O'zgaruvchan tipdagi barcha xususiyatlarni ixtiyoriy qilish
-// Pick = Asosiy typdan kerakli xususiyatlarni tanlash
-// Omit = Asosiy typdan kerakli xususiyatlarni chiqarib tashlash
-// Extract = Ikkita tipdan umumiy xususiyatlarni olish
-// Exclude = Ikkita tipdan umumiy xususiyatlarni chiqarib tashlash
-// ReturnType = Funksiya tipidan qaytish tipini olish
-// Parameters = Funksiya tipidan parametrlar tipini olish
-// constructor parameters = classning konstruktoridagi parametrlar tipini olish
-// Awaited = Promise ichidagi tipni olish
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-function fetchData() {
-    return __awaiter(this, void 0, void 0, function* () {
-        return 'Data';
-    });
-}
-// type FetchDataReturnType = ReturnType<typeof fetchData> // string
-const data = 'data';
-// class Person {
-// 	constructor(public name: string, public age: number) {}
+// type Constructor<T = {}> = new (...args: any[]) => T
+// function CanLog<TBase extends Constructor>(Base: TBase) {
+// 	return class extends Base {
+// 		log(message: string) {
+// 			console.log(`[LOG]: ${message}`)
+// 		}
+// 	}
 // }
-// type PersonConstructorParameters = ConstructorParameters<typeof Person> // [string, number]
-// const personParams: PersonConstructorParameters = ['John', 30]
-// const person = new Person(...personParams)
-// function add(a: number, b: number): number {
-// 	return a + b
+// function CanAccess<TBase extends Constructor>(Base: TBase) {
+// 	return class extends Base {
+// 		role: string = 'guest'
+// 		setRole(role: string) {
+// 			this.role = role
+// 		}
+// 		canAccess(requiredRole: string): boolean {
+// 			return this.role === requiredRole
+// 		}
+// 	}
 // }
-// type AddReturnType = ReturnType<typeof add> // number
-// type AddParametersType = Parameters<typeof add> // [number, number]
-// const params: AddParametersType = [5, 10]
-// const result: AddReturnType = add(...params)
-// console.log(result) // 15
+// function CanValidate<TBase extends Constructor>(Base: TBase) {
+// 	return class extends Base {
+// 		isValidEmail(email: string): boolean {
+// 			const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+// 			return emailRegex.test(email)
+// 		}
+// 		isNotEmpty(value: string): boolean {
+// 			return value.trim().length > 0
+// 		}
+// 	}
+// }
+// class BaseService {}
+// const MixedService = CanLog(CanAccess(CanValidate(BaseService)))
+// class UserService extends MixedService {
+// 	createUser(email: string, role: string) {
+// 		if (!this.isValidEmail(email)) {
+// 			this.log('Invalid email format')
+// 			return
+// 		}
+// 		if (!this.isNotEmpty(email)) {
+// 			this.log('Email cannot be empty')
+// 			return
+// 		}
+// 		if (!this.isNotEmpty(name)) {
+// 			this.log('Name cannot be empty')
+// 			return
+// 		}
+// 		if (!this.canAccess(admin)) {
+// 			this.log('Access denied')
+// 			return
+// 		}
+// 		this.log(`User craeted: ${name} (${email})`)
+// 	}
+// }
+// const UserService = new UserService()
+// UserService.setRole('user')
+// UserService.createUser('user@gmail.com', 'user')
+// UserService.setRole('admin')
+// UserService.createUser('admin@gmail.com', 'admin')
+// type Constructor<T> = new (...args: any[]) => T
+// function DrawShape<T extends Constructor<{}>>(Base: T) {
+// 	return class extends Base {
+// 		draw() {
+// 			console.log('Drawing a shape')
+// 		}
+// 	}
+// }
+// function FillShape<T extends Constructor<{}>>(Base: T) {
+// 	return class extends Base {
+// 		fill() {
+// 			console.log('Filling a shape')
+// 		}
+// 	}
+// }
+// class Shape {}
+// const MixedShape = FillShape(DrawShape(Shape))
+// class Circle extends MixedShape {}
+// const circle = new Circle()
+// circle.draw() // Output: Drawing a shape
+// circle.fill() // Output: Filling a shape
