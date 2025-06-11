@@ -1,80 +1,27 @@
 "use strict";
-// type Constructor<T = {}> = new (...args: any[]) => T
-// function CanLog<TBase extends Constructor>(Base: TBase) {
-// 	return class extends Base {
-// 		log(message: string) {
-// 			console.log(`[LOG]: ${message}`)
-// 		}
-// 	}
-// }
-// function CanAccess<TBase extends Constructor>(Base: TBase) {
-// 	return class extends Base {
-// 		role: string = 'guest'
-// 		setRole(role: string) {
-// 			this.role = role
-// 		}
-// 		canAccess(requiredRole: string): boolean {
-// 			return this.role === requiredRole
-// 		}
-// 	}
-// }
-// function CanValidate<TBase extends Constructor>(Base: TBase) {
-// 	return class extends Base {
-// 		isValidEmail(email: string): boolean {
-// 			const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-// 			return emailRegex.test(email)
-// 		}
-// 		isNotEmpty(value: string): boolean {
-// 			return value.trim().length > 0
-// 		}
-// 	}
-// }
-// class BaseService {}
-// const MixedService = CanLog(CanAccess(CanValidate(BaseService)))
-// class UserService extends MixedService {
-// 	createUser(email: string, role: string) {
-// 		if (!this.isValidEmail(email)) {
-// 			this.log('Invalid email format')
-// 			return
-// 		}
-// 		if (!this.isNotEmpty(email)) {
-// 			this.log('Email cannot be empty')
-// 			return
-// 		}
-// 		if (!this.isNotEmpty(name)) {
-// 			this.log('Name cannot be empty')
-// 			return
-// 		}
-// 		if (!this.canAccess(admin)) {
-// 			this.log('Access denied')
-// 			return
-// 		}
-// 		this.log(`User craeted: ${name} (${email})`)
-// 	}
-// }
-// const UserService = new UserService()
-// UserService.setRole('user')
-// UserService.createUser('user@gmail.com', 'user')
-// UserService.setRole('admin')
-// UserService.createUser('admin@gmail.com', 'admin')
-// type Constructor<T> = new (...args: any[]) => T
-// function DrawShape<T extends Constructor<{}>>(Base: T) {
-// 	return class extends Base {
-// 		draw() {
-// 			console.log('Drawing a shape')
-// 		}
-// 	}
-// }
-// function FillShape<T extends Constructor<{}>>(Base: T) {
-// 	return class extends Base {
-// 		fill() {
-// 			console.log('Filling a shape')
-// 		}
-// 	}
-// }
-// class Shape {}
-// const MixedShape = FillShape(DrawShape(Shape))
-// class Circle extends MixedShape {}
-// const circle = new Circle()
-// circle.draw() // Output: Drawing a shape
-// circle.fill() // Output: Filling a shape
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+function ChangeShape(constructor) {
+    constructor.prototype.name = 'Circle';
+    constructor.prototype.color = 'Red';
+}
+let Circle = class Circle {
+    constructor() {
+        this.name = 'Circle';
+        console.log('Circle created');
+    }
+    getValue() {
+        return this.name;
+    }
+};
+Circle = __decorate([
+    ChangeShape
+], Circle);
+const shape = new Circle();
+console.log(shape);
+// @ts-ignore
+console.log(shape.Color);
