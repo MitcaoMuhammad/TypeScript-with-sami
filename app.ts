@@ -1,51 +1,135 @@
-function CreateAt<T extends { new (...args: any[]): {} }>(constructor: T) {
-	return class extends constructor {
-		readonly createdAt: Date = new Date()
-	}
-}
+// |-----------------------------------------------| cache Decorators |--------------------------------------------------------|
 
-function LogMethod(
+function CacheResult(
 	target: any,
-	propertyKey: string,
+	propertyKey: string | symbol,
 	descriptor: PropertyDescriptor
 ) {
 	const originalMethod = descriptor.value
+	const cache = new Map<string, any>()
 
 	descriptor.value = function (...args: any[]) {
-		console.log(`Calling ${propertyKey} with arguments:`, new Date(), args)
-		return originalMethod.apply(this, args)
+		const key = JSON.stringify(args)
+
+		if (cache.has(key)) {
+			console.log(`Cache hit for ${String(propertyKey)} with args ${key}`)
+			return cache.get(key)
+		}
+
+		console.log(`Cache miss for ${String(propertyKey)} with args ${key}`)
+		const result = originalMethod.apply(this, args)
+		cache.set(key, result)
+		return result
 	}
 
 	return descriptor
 }
 
-@CreateAt
-class User {
-	constructor(public name: string, public age: number) {}
-
-	@LogMethod
-	getUserInfo() {
-		console.log(`User Info: ${this.name}, Age: ${this.age}`)
+class MathService {
+	@CacheResult
+	factorial(n: number): number {
+		if (n <= 1) return 1
+		return n * this.factorial(n - 1)
 	}
 }
 
-@CreateAt
-class Product {
-	constructor(public title: string, public price: number) {}
+const mathService = new MathService()
+console.log(mathService.factorial(5)) // Cache miss, computes result
+console.log(mathService.factorial(5)) // Cache hit, returns cached result
 
-	@LogMethod
-	getProductInfo() {
-		console.log(`Product Info: ${this.title}, Price: ${this.price}`)
-	}
-}
+// |-----------------------------------------------| Parameter Decorators |----------------------------------------------------|
 
-type CreateEntity = { createdAt: Date }
+// function LogParameter(
+// 	target: any,
+// 	propertyKey: string,
+// 	parameterIndex: number
+// ) {
+// 	console.log(
+// 		`Parameter decorator called for ${propertyKey} at index ${parameterIndex}`
+// 	)
+// }
 
-const user = new User('Alice', 30) as User & CreateEntity
-const product = new Product('Laptop', 1200) as Product & CreateEntity
+// class LogService {
+// 	createLog(name: string, @LogParameter id: string) {
+// 		console.log(`Log created: ${name} with ID: ${id}`)
+// 	}
+// }
 
-console.log(`User created at: ${user.createdAt}`)
-user.getUserInfo()
+// const logService = new LogService()
+// logService.createLog('UserLogin', '123100')
 
-console.log(`Product created at: ${product.createdAt}`)
-product.getProductInfo()
+// |-----------------------------------------------| Accessor Decorators |-----------------------------------------------------|
+
+// function Readonly(
+// 	target: any,
+// 	propertyKey: string,
+// 	descriptor: PropertyDescriptor
+// ) {
+// 	descriptor.set = function () {
+// 		throw new Error(`Cannot set value for read-only property: ${propertyKey}`)
+// 	}
+// }
+
+// class Product {
+// 	private _id: number
+
+// 	@Readonly
+// 	get id() {
+// 		return this._id
+// 	}
+// }
+
+// const product = new Product()
+// console.log(product.id)
+// // @ts-ignore
+// product.id = 123
+
+// |-----------------------------------------------| Property Decorators |-----------------------------------------------------|
+
+// function Uppercase(target: any, propertyKey: string) {
+// 	let value: string
+
+// 	const getter = () => value
+// 	const setter = (newValue: string) => {
+// 		value = newValue.toUpperCase()
+// 	}
+
+// 	Object.defineProperty(target, propertyKey, {
+// 		get: getter,
+// 		set: setter,
+// 		enumerable: true,
+// 		configurable: true,
+// 	})
+// }
+// function Lowercase(target: any, propertyKey: string) {
+// 	let value: string
+
+// 	const getter = () => value
+// 	const setter = (newValue: string) => {
+// 		value = newValue.toLowerCase()
+// 	}
+
+// 	Object.defineProperty(target, propertyKey, {
+// 		get: getter,
+// 		set: setter,
+// 		enumerable: true,
+// 		configurable: true,
+// 	})
+// }
+
+// class User {
+// 	@Uppercase
+// 	public firstName: string
+
+// 	@Lowercase
+// 	public lastName: string
+
+// 	constructor(firstName: string, lastName: string) {
+// 		this.firstName = firstName
+// 		this.lastName = lastName
+// 	}
+// }
+
+// const user = new User('John', 'Doe')
+// console.log(user.firstName)
+// console.log(user.lastName)
