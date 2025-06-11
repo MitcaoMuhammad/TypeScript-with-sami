@@ -3,12 +3,30 @@ interface IShape {
 	getValue(): string
 }
 
-function ChangeShape(constructor: Function) {
-	constructor.prototype.name = 'Circle'
-	constructor.prototype.color = 'Red'
+function ChangeShape<TBase extends { new (...args: any[]): {} }>(
+	constructor: TBase
+) {
+	return class extends constructor {
+		name: string = 'Circle'
+		color: string = 'red'
+		getInfo() {
+			return this.name + ' ' + this.color
+		}
+	}
+}
+
+function WithVersion(version: '1.0.0' | '2.0.0') {
+	return function <TBase extends { new (...args: any[]): {} }>(
+		constructor: TBase
+	) {
+		return class extends constructor {
+			version: string = version
+		}
+	}
 }
 
 @ChangeShape
+@WithVersion('1.0.0')
 class Circle implements IShape {
 	name: string = 'Circle'
 
@@ -23,5 +41,3 @@ class Circle implements IShape {
 
 const shape = new Circle()
 console.log(shape)
-// @ts-ignore
-console.log(shape.Color)

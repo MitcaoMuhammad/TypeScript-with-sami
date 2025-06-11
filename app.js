@@ -6,8 +6,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 function ChangeShape(constructor) {
-    constructor.prototype.name = 'Circle';
-    constructor.prototype.color = 'Red';
+    return class extends constructor {
+        constructor() {
+            super(...arguments);
+            this.name = 'Circle';
+            this.color = 'red';
+        }
+        getInfo() {
+            return this.name + ' ' + this.color;
+        }
+    };
+}
+function WithVersion(version) {
+    return function (constructor) {
+        return class extends constructor {
+            constructor() {
+                super(...arguments);
+                this.version = version;
+            }
+        };
+    };
 }
 let Circle = class Circle {
     constructor() {
@@ -19,9 +37,8 @@ let Circle = class Circle {
     }
 };
 Circle = __decorate([
-    ChangeShape
+    ChangeShape,
+    WithVersion('1.0.0')
 ], Circle);
 const shape = new Circle();
 console.log(shape);
-// @ts-ignore
-console.log(shape.Color);
