@@ -1,59 +1,51 @@
-function Logger(
+function CreateAt<T extends { new (...args: any[]): {} }>(constructor: T) {
+	return class extends constructor {
+		readonly createdAt: Date = new Date()
+	}
+}
+
+function LogMethod(
 	target: any,
 	propertyKey: string,
 	descriptor: PropertyDescriptor
 ) {
+	const originalMethod = descriptor.value
+
 	descriptor.value = function (...args: any[]) {
-		console.log('Method not implemented. ')
-		return args
+		console.log(`Calling ${propertyKey} with arguments:`, new Date(), args)
+		return originalMethod.apply(this, args)
 	}
 
 	return descriptor
 }
 
-function Auth(role: 'admin' | 'user') {
-	return function (
-		target: any,
-		propertyKey: string,
-		descriptor: PropertyDescriptor
-	) {
-		if (role === 'admin') {
-			throw new Error('Only Admins can access this method.')
-		}
-
-		const originalMethod = descriptor.value
-
-		descriptor.value = function (this: { isAdmin: boolean }, ...args: any[]) {
-			if (!this.isAdmin) {
-				console.log('Access denied: You are not an admin.')
-				return
-			}
-
-			return originalMethod.apply(this, args)
-		}
-
-		return descriptor
-	}
-}
-
+@CreateAt
 class User {
-	constructor(
-		public name: string,
-		public age: number,
-		public isAdmin: boolean
-	) {}
+	constructor(public name: string, public age: number) {}
 
-	@Logger
-	greeting() {
-		throw new Error('Method not implemented.')
-	}
-
-	@Auth('admin')
-	deleteUser() {
-		console.log('Deleting user')
+	@LogMethod
+	getUserInfo() {
+		console.log(`User Info: ${this.name}, Age: ${this.age}`)
 	}
 }
 
-const user = new User('John', 30, false)
-user.greeting() // Logs: Method not implemented.
-user.deleteUser() // Logs: Access denied: You are not an admin.
+@CreateAt
+class Product {
+	constructor(public title: string, public price: number) {}
+
+	@LogMethod
+	getProductInfo() {
+		console.log(`Product Info: ${this.title}, Price: ${this.price}`)
+	}
+}
+
+type CreateEntity = { createdAt: Date }
+
+const user = new User('Alice', 30) as User & CreateEntity
+const product = new Product('Laptop', 1200) as Product & CreateEntity
+
+console.log(`User created at: ${user.createdAt}`)
+user.getUserInfo()
+
+console.log(`Product created at: ${product.createdAt}`)
+product.getProductInfo()

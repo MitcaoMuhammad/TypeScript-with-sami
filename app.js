@@ -5,48 +5,55 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-function Logger(target, propertyKey, descriptor) {
+function CreateAt(constructor) {
+    return class extends constructor {
+        constructor() {
+            super(...arguments);
+            this.createdAt = new Date();
+        }
+    };
+}
+function LogMethod(target, propertyKey, descriptor) {
+    const originalMethod = descriptor.value;
     descriptor.value = function (...args) {
-        console.log('Method not implemented. ');
-        return args;
+        console.log(`Calling ${propertyKey} with arguments:`, new Date(), args);
+        return originalMethod.apply(this, args);
     };
     return descriptor;
 }
-function Auth(role) {
-    return function (target, propertyKey, descriptor) {
-        if (role === 'admin') {
-            throw new Error('Only Admins can access this method.');
-        }
-        const originalMethod = descriptor.value;
-        descriptor.value = function (...args) {
-            if (!this.isAdmin) {
-                console.log('Access denied: You are not an admin.');
-                return;
-            }
-            return originalMethod.apply(this, args);
-        };
-        return descriptor;
-    };
-}
-class User {
-    constructor(name, age, isAdmin) {
+let User = class User {
+    constructor(name, age) {
         this.name = name;
         this.age = age;
-        this.isAdmin = isAdmin;
     }
-    greeting() {
-        throw new Error('Method not implemented.');
+    getUserInfo() {
+        console.log(`User Info: ${this.name}, Age: ${this.age}`);
     }
-    deleteUser() {
-        console.log('Deleting user');
-    }
-}
+};
 __decorate([
-    Logger
-], User.prototype, "greeting", null);
+    LogMethod
+], User.prototype, "getUserInfo", null);
+User = __decorate([
+    CreateAt
+], User);
+let Product = class Product {
+    constructor(title, price) {
+        this.title = title;
+        this.price = price;
+    }
+    getProductInfo() {
+        console.log(`Product Info: ${this.title}, Price: ${this.price}`);
+    }
+};
 __decorate([
-    Auth('admin')
-], User.prototype, "deleteUser", null);
-const user = new User('John', 30, false);
-user.greeting(); // Logs: Method not implemented.
-user.deleteUser(); // Logs: Access denied: You are not an admin.
+    LogMethod
+], Product.prototype, "getProductInfo", null);
+Product = __decorate([
+    CreateAt
+], Product);
+const user = new User('Alice', 30);
+const product = new Product('Laptop', 1200);
+console.log(`User created at: ${user.createdAt}`);
+user.getUserInfo();
+console.log(`Product created at: ${product.createdAt}`);
+product.getProductInfo();
