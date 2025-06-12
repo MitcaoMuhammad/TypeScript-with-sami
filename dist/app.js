@@ -1,4 +1,9 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const math_1 = require("./modules/math");
-console.log((0, math_1.add)(5, 3));
+const callback_1 = __importDefault(require("safe-json-parse/callback"));
+const tuple1 = (0, callback_1.default)('{}');
+const json = tuple1[1];
+console.log(json);

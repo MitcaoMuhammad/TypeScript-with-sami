@@ -1,3 +1,6 @@
-import { add } from './modules/math'
+import safeParse from 'safe-json-parse/callback'
 
-console.log(add(5, 3))
+const tuple1 = safeParse('{}')
+const json = tuple1[1]
+
+console.log(json)

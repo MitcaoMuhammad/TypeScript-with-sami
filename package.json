@@ -1,0 +1,28 @@
+{
+  "name": "typescript-with-sami",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MitcaoMuhammad/TypeScript-with-sami.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MitcaoMuhammad/TypeScript-with-sami/issues"
+  },
+  "homepage": "https://github.com/MitcaoMuhammad/TypeScript-with-sami#readme",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "parse-json": "^8.3.0",
+    "safe-json-parse": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.2"
+  }
+}
