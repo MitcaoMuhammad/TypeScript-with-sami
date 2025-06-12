@@ -1,8 +1,4 @@
 "use strict";
-class Person {
-    constructor(name, age) {
-        this.name = name;
-        this.age = age;
-    }
-}
-const person = new Person('Alice', 30);
+Object.defineProperty(exports, "__esModule", { value: true });
+const user_service_1 = require("./services/user.service");
+const user = new user_service_1.UserService();

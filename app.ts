@@ -1,5 +1,3 @@
-class Person {
-	constructor(public name: string, public age: number) {}
-}
+import { UserService } from './services/user.service'
 
-const person = new Person('Alice', 30)
+const user = new UserService()

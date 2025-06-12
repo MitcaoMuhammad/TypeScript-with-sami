@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.UserService = void 0;
 class UserService {
     constructor() {
         this.users = [];
@@ -16,3 +18,4 @@ class UserService {
         return newUser;
     }
 }
+exports.UserService = UserService;
