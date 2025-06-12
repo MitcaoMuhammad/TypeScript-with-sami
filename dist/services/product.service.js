@@ -1,7 +1,12 @@
 "use strict";
 class ProductService {
     constructor() {
-        this.products = [];
+        Object.defineProperty(this, "products", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: []
+        });
     }
     addProduct(product) {
         this.products.push(product);
@@ -13,3 +18,4 @@ class ProductService {
         return this.products.find(product => product.id === id);
     }
 }
+//# sourceMappingURL=product.service.js.map

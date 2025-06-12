@@ -3,7 +3,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserService = void 0;
 class UserService {
     constructor() {
-        this.users = [];
+        Object.defineProperty(this, "users", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: []
+        });
         this.users = [
             { id: 1, name: 'Alice' },
             { id: 2, name: 'Bob' },
@@ -19,3 +24,4 @@ class UserService {
     }
 }
 exports.UserService = UserService;
+//# sourceMappingURL=user.service.js.map
